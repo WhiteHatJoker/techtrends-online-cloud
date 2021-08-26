@@ -37,6 +37,7 @@ def posts_table_exists(conn):
     else:
         return False
 
+# Functionnn to get the total number of posts in the table
 
 # Function to get a post using its ID
 def get_post(post_id):
@@ -99,10 +100,7 @@ def health():
     default_status_text = "OK - healthy"
     default_status = 200
     connection = get_db_connection()
-    # To check the failure in case connection to database closes
-    # connection.close()
-
-    # Check if the connection is good  -- Standout
+    # Check if the connection is good  -- for Standout
     if not check_connection(connection) or not posts_table_exists(connection):
         default_status_text = "ERROR - unhealthy"
         default_status = 500
@@ -116,6 +114,18 @@ def health():
     return response
 
 # Define the metrics endpoint
+@app.route('/metrics')
+def metrics():
+    connection = get_db_connection()
+    posts = connection.execute('SELECT COUNT(*) FROM posts').fetchone()[0]
+    connection.close()
+    response = app.response_class(
+            response=json.dumps({"db_connection_count": db_conn_counter, "post_count": posts}),
+            status=200,
+            mimetype='application/json'
+    )
+
+    return response
 
 # start the application on port 3111
 if __name__ == "__main__":
