@@ -70,6 +70,19 @@ def create():
 
     return render_template('create.html')
 
+# Define healz endpoint for checking the app health
+@app.route('/healz')
+def health():
+    response = app.response_class(
+            response=json.dumps({"result":"OK - healthy"}),
+            status=200,
+            mimetype='application/json'
+    )
+
+    return response
+
+# Define the metrics endpoint
+@app.route('/metrics')
 
 # start the application on port 3111
 if __name__ == "__main__":
