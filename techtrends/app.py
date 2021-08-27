@@ -83,7 +83,7 @@ def post(post_id):
         _logger.info('Article you searched for is not found')
         return render_template('404.html'), 404
     else:
-        _logger.info(f'Article {post["title"]} was accessed')
+        _logger.info('Article %s was accessed' % (post["title"]))
         return render_template('post.html', post=post)
 
 # Define the About Us page
@@ -107,7 +107,7 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-            _logger.info(f'Article {title} was created')
+            _logger.info('Article %s was created' % (title))
             return redirect(url_for('index'))
 
     return render_template('create.html')
@@ -143,7 +143,7 @@ def metrics():
             status=200,
             mimetype='application/json'
     )
-    _logger.info(f'{db_conn_counter} database connections and {posts} total articles')
+    _logger.info('%s database connections and %d total articles' % (db_conn_counter, posts))
     return response
 
 # start the application on port 3111
