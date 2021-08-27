@@ -2,9 +2,27 @@ import sqlite3
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
+import logging, sys
 
 # Global Database Connection Counter
 db_conn_counter = 0
+
+# Function to instantiate a custom logger
+def _init_logger():
+    logger = logging.getLogger("__name__")
+    logger.setLevel(logging.DEBUG)
+    handler1 = logging.StreamHandler(sys.stdout)
+    handler1.setLevel(logging.DEBUG)
+    handler2 = logging.StreamHandler(sys.stderr)
+    handler2.setLevel(logging.ERROR)
+    formatter = logging.Formatter('%(levelname)s : %(name)s : %(asctime)s , %(message)s')
+    handler1.setFormatter(formatter)
+    handler2.setFormatter(formatter)
+    logger.addHandler(handler1)
+    logger.addHandler(handler2)
+
+_init_logger()
+_logger = logging.getLogger("__name__")
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
@@ -12,7 +30,6 @@ def get_db_connection():
     global db_conn_counter
     try:
         connection = sqlite3.connect('database.db')
-        print(connection)
         connection.row_factory = sqlite3.Row
         connection.cursor()
         db_conn_counter += 1
@@ -36,8 +53,6 @@ def posts_table_exists(conn):
         return True
     else:
         return False
-
-# Functionnn to get the total number of posts in the table
 
 # Function to get a post using its ID
 def get_post(post_id):
@@ -65,13 +80,16 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-      return render_template('404.html'), 404
+        _logger.info('Article you searched for is not found')
+        return render_template('404.html'), 404
     else:
-      return render_template('post.html', post=post)
+        _logger.info(f'Article {post["title"]} was accessed')
+        return render_template('post.html', post=post)
 
 # Define the About Us page
 @app.route('/about')
 def about():
+    _logger.info('About us page was accessed')
     return render_template('about.html')
 
 # Define the post creation functionality 
@@ -89,7 +107,7 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-
+            _logger.info(f'Article {title} was created')
             return redirect(url_for('index'))
 
     return render_template('create.html')
@@ -129,4 +147,4 @@ def metrics():
 
 # start the application on port 3111
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port='3111')
+    app.run(host='0.0.0.0', port='3111', debug=True)
