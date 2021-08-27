@@ -122,6 +122,7 @@ def health():
     if not check_connection(connection) or not posts_table_exists(connection):
         default_status_text = "ERROR - unhealthy"
         default_status = 500
+        _logger.critical('Application error = unhealthy state')
 
     response = app.response_class(
         response=json.dumps({"result":default_status_text}),
@@ -142,7 +143,7 @@ def metrics():
             status=200,
             mimetype='application/json'
     )
-
+    _logger.info(f'{db_conn_counter} database connections and {posts} total articles')
     return response
 
 # start the application on port 3111
