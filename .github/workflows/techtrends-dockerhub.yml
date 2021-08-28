@@ -7,7 +7,8 @@ name: TechTrends - Package with Docker
 on:
   push:
     branches: [ main ]
-    tags: 'v*'
+    tags:
+      - v*
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,8 +28,6 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/techtrends
-          tags: |
-            type=semver,pattern=v{{major}}.{{minor}}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
