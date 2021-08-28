@@ -5,7 +5,37 @@ docker build -t techtrends .
 docker run -d -p 7111:3111 techtrends
 
 ## Docker commands used to get the application logs
-# TODO: insert the docker logs command
+docker logs 0d1de8a1bf3c
 
 ## Logs from the container running the TechTrends application
-# TODO: paste logs from the Docker container 
+172.17.0.1 - - [27/Aug/2021 23:56:42] "GET /healz HTTP/1.1" 200 -
+172.17.0.1 - - [27/Aug/2021 23:56:42] "GET /favicon.ico HTTP/1.1" 404 -
+172.17.0.1 - - [27/Aug/2021 23:56:49] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [27/Aug/2021 23:56:49] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO : __name__ : 2021-08-27 23:57:14,074 , Article 2020 CNCF Annual Report was accessed
+172.17.0.1 - - [27/Aug/2021 23:57:14] "GET /1 HTTP/1.1" 200 -
+INFO : __name__ : 2021-08-27 23:57:22,647 , 4 database connections and 6 total articles
+172.17.0.1 - - [27/Aug/2021 23:57:22] "GET /metrics HTTP/1.1" 200 -
+172.17.0.1 - - [27/Aug/2021 23:57:27] "GET /healz HTTP/1.1" 200 -
+INFO : __name__ : 2021-08-27 23:57:32,690 , 6 database connections and 6 total articles
+172.17.0.1 - - [27/Aug/2021 23:57:32] "GET /metrics HTTP/1.1" 200 -
+172.17.0.1 - - [27/Aug/2021 23:57:59] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [28/Aug/2021 00:00:07] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [28/Aug/2021 00:00:08] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [28/Aug/2021 00:02:05] "GET / HTTP/1.1" 200 -
+INFO : __name__ : 2021-08-28 00:02:06,525 , Article 2020 CNCF Annual Report was accessed
+172.17.0.1 - - [28/Aug/2021 00:02:06] "GET /1 HTTP/1.1" 200 -
+INFO : __name__ : 2021-08-28 00:02:09,663 , Article KubeCon + CloudNativeCon 2021 was accessed
+172.17.0.1 - - [28/Aug/2021 00:02:09] "GET /2 HTTP/1.1" 200 -
+INFO : __name__ : 2021-08-28 00:02:14,762 , Article you searched for is not found
+172.17.0.1 - - [28/Aug/2021 00:02:14] "GET /10 HTTP/1.1" 404 -
+172.17.0.1 - - [28/Aug/2021 00:02:16] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [28/Aug/2021 00:02:21] "GET /create HTTP/1.1" 200 -
+INFO : __name__ : 2021-08-28 00:02:29,795 , Article New Post was created
+172.17.0.1 - - [28/Aug/2021 00:02:29] "POST /create HTTP/1.1" 302 -
+172.17.0.1 - - [28/Aug/2021 00:02:29] "GET / HTTP/1.1" 200 -
+INFO : __name__ : 2021-08-28 00:02:37,587 , About us page was accessed
+172.17.0.1 - - [28/Aug/2021 00:02:37] "GET /about HTTP/1.1" 200 -
+172.17.0.1 - - [28/Aug/2021 00:02:42] "GET /healz HTTP/1.1" 200 -
+INFO : __name__ : 2021-08-28 00:02:46,702 , 18 database connections and 7 total articles
+172.17.0.1 - - [28/Aug/2021 00:02:46] "GET /metrics HTTP/1.1" 200 -
