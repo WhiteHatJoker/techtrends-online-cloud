@@ -1,4 +1,4 @@
-amespace:
+namespace:
   name: prod
 
 service:
